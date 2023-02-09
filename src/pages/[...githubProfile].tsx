@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
+import GoBack from '../components/icons/GoBack';
 import Repo from '../components/Repo';
 import { getRepos } from '../server/getRepos';
 import { Repo as RepoType } from '../types/types';
@@ -26,6 +28,16 @@ const GithubProfile = ({}: GithubProfileProps) => {
 
     return (
         <div className='flex min-h-screen w-full flex-col items-center overflow-x-hidden bg-slate-700 text-white'>
+            <motion.div
+                animate={{ opacity: 1, y: 0 }}
+                className='fixed top-5 left-5'
+                initial={{ opacity: 0, y: -100 }}
+                transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+            >
+                <a className='font-bebas text-4xl' href='/'>
+                    <GoBack />
+                </a>
+            </motion.div>
             <div className='flex w-full max-w-6xl flex-col items-center py-10'>
                 {repos === undefined ? (
                     <div className='font-bebas text-4xl'>Loading...</div>
